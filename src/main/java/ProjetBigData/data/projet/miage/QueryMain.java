@@ -13,8 +13,13 @@ public class QueryMain{
 //	    	Query3 q3 = new Query3();
 //	    	q3.query3("B003D9RBMU","2020-11-03","2020-11-20");
 //	    	
-	    	Query4 q4 = new Query4();
-	    	q4.query4();
+//	    	Query4 q4 = new Query4();
+//	    	q4.query4();
+//	    	
+//	    	Query5 q5 = new Query5();
+//	    	q5.query5("10995116278711","MYLAPS_Sports_Timing\r");
+	    	
+	    	
 	    	
 	    }
 		catch(Exception e){

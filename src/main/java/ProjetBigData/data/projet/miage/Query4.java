@@ -18,7 +18,7 @@ public class Query4 {
 	
 	public Query4() {}
 	
-	public void query4() {
+	public ArrayList<String> query4() {
 		Entry<String, StreamEntryID> streamOrder = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("Order", new StreamEntryID());
 		Entry<String, StreamEntryID> streamPersonKnows = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("person_knows", new StreamEntryID());
 		List<Entry<String, List<StreamEntry>>> streamO = jedis.xread(142257, 1L, streamOrder);
@@ -99,19 +99,22 @@ public class Query4 {
 	    	}
 	    }
 	    
-	    List<String> common = new ArrayList<String>(ami1);
+	    ArrayList<String> common = new ArrayList<String>(ami1);
 	    common.retainAll(ami2);
 	    
 	    for(String p : common) {
 			System.out.println(p + " est un ami commun aux deux plus gros acheteurs ou à l'un de leurs amis");
 		}
 	    
-	    System.out.println("1er à " + ami1.size() + " amis");
-	    System.out.println("2eme à " + ami2.size() + " amis");
-	    
-	    System.out.println("Le commun est de " + common.size());
-	    
-	    if(common.size() == 0)
-	    	System.out.println("Les acheteurs n'ont aucun amis en commun !");
+	    return common;
+
+//	    
+//	    System.out.println("1er à " + ami1.size() + " amis");
+//	    System.out.println("2eme à " + ami2.size() + " amis");
+//	    
+//	    System.out.println("Le commun est de " + common.size());
+//	    
+//	    if(common.size() == 0)
+//	    	System.out.println("Les acheteurs n'ont aucun amis en commun !");
 	}
 }

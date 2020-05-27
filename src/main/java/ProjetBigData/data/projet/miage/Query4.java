@@ -62,8 +62,40 @@ public class Query4 {
 	    for(StreamEntry streamUneLignePK : streamPK.get(0).getValue()){
 	    	if(streamUneLignePK.getFields().get("Person.idk").equals(best)) {
 	    		ami1.add(streamUneLignePK.getFields().get("Person.id"));
+	    		
+	    		for(StreamEntry streamUneLignePK2 : streamPK.get(0).getValue()){
+	    			
+	    			if(streamUneLignePK2.getFields().get("Person.idk").equals(streamUneLignePK.getFields().get("Person.id"))) {
+	    				if( !(ami1.contains(streamUneLignePK2.getFields().get("Person.id"))) && (streamUneLignePK2.getFields().get("Person.id") != best || streamUneLignePK2.getFields().get("Person.id") != best2)) {
+	    					ami1.add(streamUneLignePK2.getFields().get("Person.id"));
+	    					
+	    					for(StreamEntry streamUneLignePK3 : streamPK.get(0).getValue()){
+	    						
+	    						if(streamUneLignePK3.getFields().get("Person.idk").equals(streamUneLignePK2.getFields().get("Person.id"))) 
+	    		    				if( !(ami1.contains(streamUneLignePK3.getFields().get("Person.id"))) && (streamUneLignePK3.getFields().get("Person.id") != best || streamUneLignePK3.getFields().get("Person.id") != best2)) 
+	    		    					ami1.add(streamUneLignePK3.getFields().get("Person.id"));
+	    					}
+	    				}
+	    			}
+	    		}
 	    	}else if(streamUneLignePK.getFields().get("Person.idk").equals(best2)) {
 	    		ami2.add(streamUneLignePK.getFields().get("Person.id"));
+	    		
+	    		for(StreamEntry streamUneLignePK2 : streamPK.get(0).getValue()){
+	    			
+	    			if(streamUneLignePK2.getFields().get("Person.idk").equals(streamUneLignePK.getFields().get("Person.id"))) {
+	    				if( !(ami2.contains(streamUneLignePK2.getFields().get("Person.id"))) && (streamUneLignePK2.getFields().get("Person.id") != best || streamUneLignePK2.getFields().get("Person.id") != best2)) {
+	    					ami2.add(streamUneLignePK2.getFields().get("Person.id"));
+	    					
+	    					for(StreamEntry streamUneLignePK3 : streamPK.get(0).getValue()){
+	    						
+	    						if(streamUneLignePK3.getFields().get("Person.idk").equals(streamUneLignePK2.getFields().get("Person.id"))) 
+	    		    				if( !(ami2.contains(streamUneLignePK3.getFields().get("Person.id"))) && (streamUneLignePK3.getFields().get("Person.id") != best || streamUneLignePK3.getFields().get("Person.id") != best2)) 
+	    		    					ami2.add(streamUneLignePK3.getFields().get("Person.id"));
+	    					}
+	    				}
+	    			}
+	    		}
 	    	}
 	    }
 	    
@@ -71,8 +103,13 @@ public class Query4 {
 	    common.retainAll(ami2);
 	    
 	    for(String p : common) {
-			System.out.println(p + " est un ami commun aux deux plus gros acheteurs");
+			System.out.println(p + " est un ami commun aux deux plus gros acheteurs ou à l'un de leurs amis");
 		}
+	    
+	    System.out.println("1er à " + ami1.size() + " amis");
+	    System.out.println("2eme à " + ami2.size() + " amis");
+	    
+	    System.out.println("Le commun est de " + common.size());
 	    
 	    if(common.size() == 0)
 	    	System.out.println("Les acheteurs n'ont aucun amis en commun !");

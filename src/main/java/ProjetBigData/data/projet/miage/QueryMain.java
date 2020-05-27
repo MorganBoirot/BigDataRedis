@@ -18,8 +18,9 @@ public class QueryMain{
 //	    	
 //	    	Query5 q5 = new Query5();
 //	    	q5.query5("10995116278711","MYLAPS_Sports_Timing\r");
-	    	
-	    	
+//	    	
+//	    	Query6 q6 = new Query6();
+//	    	q6.query6("32985348843154", "10995116278711");
 	    	
 	    }
 		catch(Exception e){

@@ -1,6 +1,7 @@
 package ProjetBigData.data.projet.miage;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class QueryMain{
 	
@@ -27,9 +28,14 @@ public class QueryMain{
 //	    	Query7 q7 = new Query7();
 //	    	q7.query7();
 //	    	
-	    	Query8 q8 = new Query8();
-	    	ArrayList <String> l = q8.query8("Signia_(sportswear)", "2019");
-	    	q8.query82(l, "2019");
+//	    	Query8 q8 = new Query8();
+//	    	ArrayList <String> l = q8.query8("Signia_(sportswear)", "2019");
+//	    	q8.query82(l, "2019");
+	    	
+	    	Query9 q9 = new Query9();
+	    	Map<String, ArrayList<String>> map = q9.query9("United_States");
+	    	q9.query92(map);
+	    	
 	    }
 		catch(Exception e){
 			e.printStackTrace();

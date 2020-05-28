@@ -31,10 +31,15 @@ public class QueryMain{
 //	    	Query8 q8 = new Query8();
 //	    	ArrayList <String> l = q8.query8("Signia_(sportswear)", "2019");
 //	    	q8.query82(l, "2019");
-	    	
+//	    	
 	    	Query9 q9 = new Query9();
 	    	Map<String, ArrayList<String>> map = q9.query9("United_States");
-	    	q9.query92(map);
+//	    	q9.query92(map);
+	    	Map<String, ArrayList<String>> x = q9.query93(map);
+	    	q9.query94(x);
+	    	
+//	    	Query10 q10 = new Query10();
+//	    	q10.query10();
 	    	
 	    }
 		catch(Exception e){

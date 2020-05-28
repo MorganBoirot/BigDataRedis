@@ -1,8 +1,11 @@
 package ProjetBigData.data.projet.miage;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,9 +148,63 @@ public class Query9 {
 			System.out.println("Il y a " + entry.getValue() + " acheteurs chez " +  entry.getKey());
 		}
 		
+		
 	}
 	
-	public void query93() {
+	public Map<String, ArrayList<String>> query93(Map<String, ArrayList<String>> map) {
+		Entry<String, StreamEntryID> streamPostCreator = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("post_hasCreator", new StreamEntryID());
+		List<Entry<String, List<StreamEntry>>> streamPC = jedis.xread(1231991, 1L, streamPostCreator);
 		
+		Map<String, ArrayList<String>> postCreator = new HashMap<String,ArrayList<String>>();
+		
+		for(Entry<String, ArrayList<String>> entry : map.entrySet()){
+			for(StreamEntry streamUneLignePC : streamPC.get(0).getValue()) {
+				if(entry.getValue().contains(streamUneLignePC.getFields().get("Person.id"))) {
+					if(postCreator.containsKey(streamUneLignePC.getFields().get("Person.id"))) {
+						ArrayList<String> x = postCreator.get(streamUneLignePC.getFields().get("Person.id"));
+						x.add(streamUneLignePC.getFields().get("Post.id"));
+						postCreator.remove(streamUneLignePC.getFields().get("Person.id"));
+						postCreator.put(streamUneLignePC.getFields().get("Person.id"), x);
+					}else {
+						ArrayList<String> x = new ArrayList<String>();
+						x.add(streamUneLignePC.getFields().get("Post.id"));
+						postCreator.put(streamUneLignePC.getFields().get("Person.id"), x);
+					}
+				}
+			}
+		}
+		System.out.println("done");
+		return postCreator;	
+	}
+	
+	public void query94(Map<String, ArrayList<String>> postCreator) throws ParseException {
+		Entry<String, StreamEntryID> streamPost = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("Post", new StreamEntryID());
+		List<Entry<String, List<StreamEntry>>> streamP = jedis.xread(1231991, 1L, streamPost);
+		Map<String, StreamEntry> post = new HashMap<String, StreamEntry>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//0-9
+		
+		for(Entry<String, ArrayList<String>> entry : postCreator.entrySet()){
+			for(StreamEntry streamUneLigneP : streamP.get(0).getValue()) {
+				if(entry.getValue().contains(streamUneLigneP.getFields().get("id"))){
+					if(post.containsKey(entry.getKey())) {
+						StreamEntry x = post.get(entry.getKey());
+						Date date = sdf.parse(x.getFields().get("creationDate").substring(0, 9));
+						Date date2 = sdf.parse(streamUneLigneP.getFields().get("creationDate").substring(0, 9));
+						if(date.compareTo(date2) < 0) {
+							x = streamUneLigneP;
+							post.remove(entry.getKey());
+							post.put(entry.getKey(), x);
+						}
+					}else {
+						StreamEntry x = streamUneLigneP;
+						post.put(entry.getKey(), x);
+					}
+				}
+			}
+		}
+		
+		for (Entry<String, StreamEntry> entry : post.entrySet()) {
+			System.out.println(entry.getKey() + " a comme post le plus récent: " + entry.getValue().getFields().get("content") );
+		}
 	}
 }

@@ -61,7 +61,7 @@ public class Query5 {
 		
 		for (StreamEntry streamUneLigneF : streamF.get(0).getValue()) {
 			if(myMap.containsKey(streamUneLigneF.getFields().get("PersonId")) && myMap.containsValue(streamUneLigneF.getFields().get("asin")))
-				if(streamUneLigneF.getFields().get("feedback").startsWith(" 5.0"))
+				if(streamUneLigneF.getFields().get("feedback").contains("5.0,"))
 				feedback.add(streamUneLigneF.getFields().get("feedback"));
 		}
 		

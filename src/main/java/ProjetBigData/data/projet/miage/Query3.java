@@ -39,7 +39,7 @@ public class Query3 {
 					Date dateT = sdf.parse(streamUneLigneI.getFields().get("OrderDate"));
 					
 					if(!(dateT.compareTo(date2) > 0 || dateT.compareTo(date) < 0))
-						if(streamUneLigneF.getFields().get("feedback").startsWith(" 1") || streamUneLigneF.getFields().get("feedback").startsWith(" 2")) {
+						if(streamUneLigneF.getFields().get("feedback").contains("1.0,") || streamUneLigneF.getFields().get("feedback").contains("2.0,")) {
 						list.add(streamUneLigneF.getFields().get("feedback"));
 					}
 				}	

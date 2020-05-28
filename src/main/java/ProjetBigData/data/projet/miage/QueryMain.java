@@ -22,6 +22,9 @@ public class QueryMain{
 //	    	Query6 q6 = new Query6();
 //	    	q6.query6("32985348843154", "10995116278711");
 	    	
+//	    	Query7 q7 = new Query7();
+//	    	q7.query7();
+	    	
 	    }
 		catch(Exception e){
 			e.printStackTrace();

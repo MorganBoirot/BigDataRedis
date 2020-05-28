@@ -22,7 +22,7 @@ public class Query6 {
 		Entry<String, StreamEntryID> streamInvoice = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("Invoice", new StreamEntryID());
 		Entry<String, StreamEntryID> streamPersonKnows = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("person_knows", new StreamEntryID());
 		List<Entry<String, List<StreamEntry>>> streamPK = jedis.xread(187810, 1L, streamPersonKnows);
-		List<Entry<String, List<StreamEntry>>> streamI = jedis.xread(142257, 1L, streamInvoice);
+		List<Entry<String, List<StreamEntry>>> streamI = jedis.xread(693910, 1L, streamInvoice);
 		
 		List<String> recherche1 = new ArrayList<String>();
 		List<String> recherche2 = new ArrayList<String>();

@@ -20,8 +20,7 @@ public class Query7 {
 	
 	public Query7() {}
 	
-	public void query7() throws ParseException {
-		//Signia_(sportswear)
+	public void query7(String vendeur, String date) throws ParseException {
 		
 		Entry<String, StreamEntryID> streamBrand = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("Brand", new StreamEntryID());
 		List<Entry<String, List<StreamEntry>>> streamB = jedis.xread(9694, 1L, streamBrand);
@@ -30,10 +29,8 @@ public class Query7 {
 		Entry<String, StreamEntryID> streamFeedback = new AbstractMap.SimpleImmutableEntry<String, StreamEntryID>("Feedback", new StreamEntryID());
 		List<Entry<String, List<StreamEntry>>> streamF = jedis.xread(150000, 1L, streamFeedback);
 		
-		String vendeur = "Elfin_Sports_Cars";
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateT = sdf.parse("2019-08-06");
+		Date dateT = sdf.parse(date);
 		
 		int annee = dateT.getYear()+1900;
 		int annee2 = dateT.getYear()+1900;

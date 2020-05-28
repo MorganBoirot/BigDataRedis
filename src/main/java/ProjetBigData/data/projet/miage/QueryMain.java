@@ -26,7 +26,7 @@ public class QueryMain{
 //	    	q6.query6("32985348843154", "10995116278711");
 //	    	
 //	    	Query7 q7 = new Query7();
-//	    	q7.query7();
+//	    	q7.query7("Elfin_Sports_Cars","2019-08-06");
 //	    	
 //	    	Query8 q8 = new Query8();
 //	    	ArrayList <String> l = q8.query8("Signia_(sportswear)", "2019");
